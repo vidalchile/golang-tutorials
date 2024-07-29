@@ -1,43 +1,36 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 func main() {
-	x := 0
-	for x < 5 {
-		fmt.Println("value of x is:", x)
-		x++ // infinite loop without this
+	age := 45
+
+	fmt.Println(age <= 50)
+	fmt.Println(age >= 50)
+	fmt.Println(age == 45)
+	fmt.Println(age != 50)
+
+	if age < 30 {
+		fmt.Println("age is less than 30")
+	} else if age < 40 {
+		fmt.Println("age is less than 40")
+	} else {
+		fmt.Println("age is not less than 40")
 	}
 
-	fmt.Print("-------------------------------------\n")
-
-	for i := 0; i < 5; i++ {
-		fmt.Println("value of i is:", i)
-	}
-
-	fmt.Print("-------------------------------------\n")
-
-	names := []string{"mario", "luigi", "yoshi", "peach"}
-	for i := 0; i < len(names); i++ {
-		fmt.Println("value name is:", names[i])
-	}
-
-	fmt.Print("-------------------------------------\n")
+	names := []string{"mario", "luigi", "yoshi", "peach", "bowser"}
 
 	for index, value := range names {
+		if index == 1 {
+			fmt.Println("continuing at pos", index)
+			continue
+		}
+
+		if index > 2 {
+			fmt.Println("braking at pos", index)
+			break
+		}
+
 		fmt.Printf("the value at pos %v is %v \n", index, value)
-		value = "new string"
 	}
-
-	fmt.Print("-------------------------------------\n")
-
-	for _, value := range names {
-		fmt.Print(value, ",")
-		value = "new string"
-	}
-
-	// changing val in a loop does not mutate the original slice
-	fmt.Println(names)
 }
