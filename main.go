@@ -3,20 +3,14 @@ package main
 import "fmt"
 
 func updateName(n string) {
-	// no actualizamos la variable name
-	// actualizamos la copia de la variable name
 	n = "cristian"
+	// & gets the memory address of the value (pointer)
+	fmt.Println("memory address of n is:", &n)
+	fmt.Println("value n:", n)
 }
 
-func updateNameWithReturn(x string) string {
-	// no actualizamos la variable name
-	// actualizamos la copia de la variable name
-	x = "cristian"
-	return x
-}
-
-func updateMenu(y map[string]float64) {
-	y["coffee"] = 1.3
+func updatePointer(n *string) {
+	*n = "kira"
 }
 
 func main() {
@@ -24,33 +18,29 @@ func main() {
 
 	name := "carolina"
 
-	// al pasar una variable a una funcion go crea una copia
 	updateName(name)
+
+	// & gets the memory address of the value (pointer)
+	fmt.Println("memory address of name is:", &name)
+
+	// * gets the value at the specified memory address
+	m := &name // ahora es un puntero
+	fmt.Println("memory address m:", m)
+	fmt.Println("value at memory address m:", *m)
 
 	fmt.Println(name)
 
-	// al crear una variable go la almacena en un bloque de memoria
+	updatePointer(m)
+
+	fmt.Println(name)
+
 	/*
 
-		|----name----|------n-------|
-		|  0x001     |  0x002  	    |
-		|------------|--------------|
-		| "carolina" | "cristian"   |
-		|------------|--------------|
+		|--name-------|----m----|
+		|  0x001  	  |  0x002  |
+		|-------------|---------|
+		| "carolina"  | p0x001  |
+		|-------------|---------|
 
 	*/
-
-	// ¿Como solucionamos esto?
-	name = updateNameWithReturn(name)
-	println(name)
-
-	// group B types -> slices, maps, functions
-	menu := map[string]float64{
-		"pie":       1.1,
-		"ice cream": 1.2,
-	}
-
-	// para este tipo de caso si es posible modificar el valor original (pointer wrapper values)
-	updateMenu(menu)
-	fmt.Println(menu)
 }
