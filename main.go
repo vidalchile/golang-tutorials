@@ -2,45 +2,24 @@ package main
 
 import "fmt"
 
-func updateName(n string) {
-	n = "cristian"
-	// & gets the memory address of the value (pointer)
-	fmt.Println("memory address of n is:", &n)
-	fmt.Println("value n:", n)
+type bill struct {
+	name  string
+	items map[string]float64
+	tip   float64
 }
 
-func updatePointer(n *string) {
-	*n = "kira"
+// make new bills
+func newBill(name string) bill {
+	b := bill{
+		name:  name,
+		items: map[string]float64{},
+		tip:   0,
+	}
+	return b
 }
 
 func main() {
-	// group A types -> strings, ints, bools, floats, arrays, structs (non-pointer values)
+	myBill := newBill("mario's bill")
 
-	name := "carolina"
-
-	updateName(name)
-
-	// & gets the memory address of the value (pointer)
-	fmt.Println("memory address of name is:", &name)
-
-	// * gets the value at the specified memory address
-	m := &name // ahora es un puntero
-	fmt.Println("memory address m:", m)
-	fmt.Println("value at memory address m:", *m)
-
-	fmt.Println(name)
-
-	updatePointer(m)
-
-	fmt.Println(name)
-
-	/*
-
-		|--name-------|----m----|
-		|  0x001  	  |  0x002  |
-		|-------------|---------|
-		| "carolina"  | p0x001  |
-		|-------------|---------|
-
-	*/
+	fmt.Println(myBill)
 }
